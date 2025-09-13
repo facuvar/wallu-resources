@@ -8,4 +8,4 @@ pubDate: '2024-09-12'
 
 Este es un post simple para verificar que funciona.
 
-¡Sin imágenes ni complicaciones!
+¡Sin imágenes ni complicaciones!!
