@@ -1,17 +1,17 @@
 ---
-title: 'Crear y ganar dinero con E-bookst'
+title: 'Crear y ganar dinero con E-books'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 08 2022'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
-En un mundo cada vez más digital, los ebooks se convirtieron en una de las formas más accesibles de compartir conocimiento y generar ingresos. Tanto si sos experto en un tema específico, escritor en crecimiento o simplemente querés emprender online, autopublicar un ebook puede abrirte nuevas oportunidades.  
-El éxito de un ebook depende en gran medida de la relevancia del tema. Pensá en tus habilidades, experiencias o pasiones y en qué problema podés resolverle a tu audiencia. Herramientas como Google Trends o AnswerThePublic pueden ayudarte a detectar lo que la gente busca.  
-Un buen ebook no necesita ser largo, sino claro y útil. Dividí tu contenido en capítulos, usá un tono cercano y asegurate de entregar valor real. Hoy existen herramientas de IA que pueden asistirte en la redacción y edición, acelerando el proceso.  
-El diseño es clave para generar confianza. Usá programas como Canva, Adobe InDesign o generadores de ebooks online. Asegurate de incluir una portada llamativa, tipografía clara y un índice fácil de navegar.  
-Algunas de las opciones más populares para publicar son Amazon Kindle Direct Publishing (KDP), Apple Books, Google Play Books y tu propio sitio web con pasarelas de pago. Cada plataforma tiene sus propias comisiones y beneficios. Lo ideal es combinar varias para ampliar el alcance.  
-De nada sirve un gran ebook si nadie lo conoce. Usá redes sociales, anuncios pagos (Google Ads, Facebook Ads) y colaboraciones con influencers o blogs de nicho. También podés crear contenido gratuito relacionado y ofrecerlo como “gancho” para impulsar las ventas.  
-La gran ventaja de los ebooks es que, una vez creados, pueden venderse de manera automática durante meses o años. Si mantenés actualizados tus contenidos y optimizás la promoción, podés construir una fuente constante de ingresos pasivos.  
+En un mundo cada vez mas digital, los ebooks se convirtieron en una de las formas mas accesibles de compartir conocimiento y generar ingresos. Tanto si sos experto en un tema especifico, escritor en crecimiento o simplemente queres emprender online, autopublicar un ebook puede abrirte nuevas oportunidades.
+El exito de un ebook depende en gran medida de la relevancia del tema. Pensa en tus habilidades, experiencias o pasiones y en que problema podes resolverle a tu audiencia. Herramientas como Google Trends o AnswerThePublic pueden ayudarte a detectar lo que la gente busca.
+Un buen ebook no necesita ser largo, sino claro y util. Dividi tu contenido en capitulos, usa un tono cercano y asegurate de entregar valor real. Hoy existen herramientas de IA que pueden asistirte en la redaccion y edicion, acelerando el proceso.
+El diseno es clave para generar confianza. Usa programas como Canva, Adobe InDesign o generadores de ebooks online. Asegurate de incluir una portada llamativa, tipografia clara y un indice facil de navegar.
+Algunas de las opciones mas populares para publicar son Amazon Kindle Direct Publishing (KDP), Apple Books, Google Play Books y tu propio sitio web con pasarelas de pago. Cada plataforma tiene sus propias comisiones y beneficios. Lo ideal es combinar varias para ampliar el alcance.
+De nada sirve un gran ebook si nadie lo conoce. Usa redes sociales, anuncios pagos (Google Ads, Facebook Ads) y colaboraciones con influencers o blogs de nicho. Tambien podes crear contenido gratuito relacionado y ofrecerlo como "gancho" para impulsar las ventas.
+La gran ventaja de los ebooks es que, una vez creados, pueden venderse de manera automatica durante meses o anos. Si mantenes actualizados tus contenidos y optimizas la promocion, podes construir una fuente constante de ingresos pasivos.
 
 Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
 
