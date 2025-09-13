@@ -1,62 +1,176 @@
-# Astro Starter Kit: Blog
+# Blog Wallu Resources
 
-```sh
-npm create astro@latest -- --template blog
+Un blog moderno creado con **Astro** y **Decap CMS** que funciona tanto en desarrollo local como en producción.
+
+## 🚀 Características
+
+- ⚡ **Astro**: Framework moderno y rápido
+- 📝 **Decap CMS**: Sistema de gestión de contenido fácil de usar
+- 🎨 **Diseño responsivo**: Se ve genial en todos los dispositivos
+- 🔍 **SEO optimizado**: Meta tags y sitemap automático
+- 📱 **PWA ready**: Preparado para ser una Progressive Web App
+
+## 🛠️ Desarrollo Local
+
+### Prerrequisitos
+
+- Node.js 18+ 
+- npm o yarn
+
+### Instalación
+
+1. Clona el repositorio:
+```bash
+git clone <tu-repo>
+cd wallu-resources
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-Features:
+### Ejecutar en desarrollo
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+1. **Servidor de desarrollo de Astro**:
+```bash
+npm run dev
+```
+El sitio estará disponible en `http://localhost:4321`
 
-## 🚀 Project Structure
+2. **Backend local de Decap CMS** (en otra terminal):
+```bash
+npm run cms
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+3. **Acceder al panel de administración**:
+Ve a `http://localhost:4321/admin` para gestionar el contenido.
 
-```text
+## 📝 Gestión de Contenido
+
+### Para Desarrolladores
+
+Los posts del blog se almacenan en `src/content/blog/` como archivos Markdown con frontmatter YAML.
+
+Ejemplo de estructura de un post:
+```markdown
+---
+title: "Título del post"
+description: "Descripción breve"
+pubDate: 2024-09-13T10:00:00.000Z
+updatedDate: 2024-09-13T10:00:00.000Z
+heroImage: "/images/uploads/mi-imagen.jpg"
+---
+
+# Contenido del post
+
+Tu contenido en Markdown aquí...
+```
+
+### Para Editores
+
+1. Ve a `/admin` en tu navegador
+2. En desarrollo local, podrás acceder directamente
+3. En producción, necesitarás autenticarte con GitHub
+4. Usa la interfaz visual para crear y editar posts
+
+## 🚀 Despliegue en Producción con Vercel
+
+### Configuración para resources.wallu.app
+
+1. **Variables de entorno necesarias en Vercel**:
+```bash
+ASTRO_SITE_URL=https://resources.wallu.app
+GITHUB_CLIENT_ID=tu_github_client_id
+GITHUB_CLIENT_SECRET=tu_github_client_secret
+```
+
+2. **Configuración de GitHub OAuth App**:
+   - Ve a GitHub > Settings > Developer settings > OAuth Apps
+   - Crea una nueva OAuth App con:
+     - Application name: "Wallu Resources Blog"
+     - Homepage URL: `https://resources.wallu.app`
+     - Authorization callback URL: `https://resources.wallu.app/api/auth`
+
+3. **Despliegue en Vercel**:
+   - Conecta tu repositorio GitHub a Vercel
+   - Vercel detectará automáticamente que es un proyecto Astro
+   - Configura las variables de entorno en el dashboard de Vercel
+   - El sitio se desplegará automáticamente
+
+4. **Configuración del repositorio**:
+   - ✅ Ya configurado para `facuvar/wallu-resources`
+   - El repositorio está en: https://github.com/facuvar/wallu-resources.git
+
+## 📁 Estructura del Proyecto
+
+```
+/
 ├── public/
+│   ├── admin/           # Interfaz de Decap CMS
+│   │   ├── config.yml   # Configuración del CMS
+│   │   └── index.html   # Página del admin
+│   └── images/
+│       └── uploads/     # Imágenes subidas por el CMS
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── components/      # Componentes de Astro
+│   ├── config/          # Configuración del sitio
+│   ├── content/
+│   │   └── blog/        # Posts del blog (Markdown)
+│   ├── layouts/         # Layouts de Astro
+│   ├── pages/           # Páginas del sitio
+│   └── styles/          # Estilos CSS
+├── astro.config.mjs     # Configuración de Astro
+└── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🎨 Personalización
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Configuración del Sitio
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Edita `src/config/site.json` para cambiar:
+- Título del sitio
+- Descripción
+- URL de producción
+- Email de contacto
+- Redes sociales
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Estilos
 
-## 🧞 Commands
+Los estilos están en `src/styles/global.css`. Puedes personalizar:
+- Colores
+- Tipografías
+- Espaciado
+- Componentes
 
-All commands are run from the root of the project, from a terminal:
+### Configuración del CMS
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Edita `public/admin/config.yml` para:
+- Añadir nuevas colecciones
+- Modificar campos de los posts
+- Configurar widgets personalizados
 
-## 👀 Want to learn more?
+## 🔧 Scripts Disponibles
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `npm run dev` - Servidor de desarrollo de Astro
+- `npm run build` - Build para producción
+- `npm run preview` - Preview del build
+- `npm run cms` - Backend local de Decap CMS
 
-## Credit
+## 📚 Recursos
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+- [Documentación de Astro](https://docs.astro.build)
+- [Documentación de Decap CMS](https://decapcms.org/docs/)
+- [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
+
+## 🤝 Contribuir
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.

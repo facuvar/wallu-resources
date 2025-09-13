@@ -6,6 +6,20 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: process.env.ASTRO_SITE_URL || 'https://resources.wallu.app',
 	integrations: [mdx(), sitemap()],
+	// Optimizaciones para producción
+	output: 'static',
+	build: {
+		assets: 'assets'
+	},
+	compressHTML: true,
+	// Configuración para desarrollo local con Decap CMS
+	vite: {
+		server: {
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+			}
+		}
+	}
 });

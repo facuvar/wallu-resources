@@ -1,0 +1,79 @@
+---
+// Página de administración de Decap CMS
+---
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administración del Blog - Wallu Resources</title>
+</head>
+<body>
+  <div id="nc-root"></div>
+  
+  <script>
+    // Interceptar cualquier intento de cargar config.yml
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+      if (url.includes('config.yml')) {
+        console.log('Interceptando carga de config.yml, usando configuración manual');
+        return Promise.reject(new Error('Usando configuración manual'));
+      }
+      return originalFetch.apply(this, arguments);
+    };
+    
+    // Configuración manual completa
+    window.CMS_MANUAL_INIT = true;
+  </script>
+  
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <script>
+    console.log('Iniciando CMS con configuración manual...');
+    
+    const config = {
+      backend: {
+        name: 'test-repo', // Backend de prueba para desarrollo local
+      },
+      local_backend: true,
+      media_folder: "public/images/uploads",
+      public_folder: "/images/uploads",
+      collections: [
+        {
+          name: "blog",
+          label: "Posts del Blog",
+          folder: "src/content/blog",
+          create: true,
+          slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+          fields: [
+            {label: "Título", name: "title", widget: "string"},
+            {label: "Descripción", name: "description", widget: "string"},
+            {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+            {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+            {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
+            {label: "Contenido", name: "body", widget: "markdown"}
+          ]
+        }
+      ]
+    };
+    
+    try {
+      window.CMS.init({ config: config });
+      console.log('CMS inicializado correctamente');
+    } catch (error) {
+      console.error('Error al inicializar CMS:', error);
+      
+      // Retry después de un breve delay
+      setTimeout(() => {
+        try {
+          window.CMS.init({ config: config });
+          console.log('CMS inicializado en segundo intento');
+        } catch (retryError) {
+          console.error('Error en segundo intento:', retryError);
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

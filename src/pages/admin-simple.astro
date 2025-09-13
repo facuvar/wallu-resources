@@ -1,0 +1,69 @@
+---
+// Página de administración simplificada
+---
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Simple - Wallu Resources</title>
+</head>
+<body>
+  <div id="nc-root"></div>
+  
+  <script>
+    // Bloquear carga de config.yml completamente
+    window.CMS_MANUAL_INIT = true;
+    
+    // Interceptar fetch para evitar 404 de config.yml
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const url = args[0];
+      if (typeof url === 'string' && url.includes('config.yml')) {
+        console.log('Bloqueando carga de config.yml');
+        return Promise.reject(new Error('Config manual'));
+      }
+      return originalFetch.apply(this, args);
+    };
+  </script>
+  
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <script>
+    console.log('=== INICIANDO CMS SIMPLE ===');
+    
+    setTimeout(() => {
+      console.log('Inicializando con configuración básica...');
+      
+      window.CMS.init({
+        config: {
+          backend: {
+            name: 'test-repo',
+          },
+          local_backend: true,
+          media_folder: "public/images/uploads",
+          public_folder: "/images/uploads",
+          collections: [
+            {
+              name: "blog",
+              label: "Posts",
+              folder: "src/content/blog",
+              create: true,
+              slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+              fields: [
+                {label: "Título", name: "title", widget: "string"},
+                {label: "Descripción", name: "description", widget: "string"},
+                {label: "Fecha", name: "pubDate", widget: "datetime"},
+                {label: "Contenido", name: "body", widget: "markdown"}
+              ]
+            }
+          ]
+        }
+      });
+      
+      console.log('=== CMS INICIALIZADO ===');
+    }, 500);
+  </script>
+</body>
+</html>
