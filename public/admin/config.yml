@@ -2,8 +2,6 @@ backend:
   name: github
   repo: facuvar/wallu-resources
   branch: main
-  base_url: https://resources.wallu.app
-  auth_endpoint: api/auth
 
 # Para desarrollo local
 local_backend: true
