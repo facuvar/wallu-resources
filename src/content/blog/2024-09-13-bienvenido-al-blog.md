@@ -6,7 +6,7 @@ updatedDate: 2024-09-13T10:00:00.000Z
 heroImage: ""
 ---
 
-# ¡Bienvenido a nuestro nuevo blog!
+# ¡Bienvenido a nuestro nuevo blog!!!!
 
 Este es el primer post de nuestro blog creado con **Astro** y **Decap CMS**. 
 
