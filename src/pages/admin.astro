@@ -8,6 +8,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administración del Blog - Wallu Resources</title>
+  <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.css" />
 </head>
 <body>
   <div id="nc-root"></div>
@@ -17,81 +18,96 @@
     window.CMS_MANUAL_INIT = true;
   </script>
   
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   
   <script>
-    console.log('Iniciando Decap CMS...');
+    console.log('Iniciando Netlify CMS...');
     
     // Detectar si estamos en desarrollo local
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     
-    let config;
-    
-    if (isLocal) {
-      // Configuración para desarrollo local
-      config = {
-        backend: {
-          name: 'test-repo',
-        },
-        local_backend: true,
-        media_folder: "public/images/uploads",
-        public_folder: "/images/uploads",
-        collections: [
-          {
-            name: "blog",
-            label: "Posts del Blog",
-            folder: "src/content/blog",
-            create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-            fields: [
-              {label: "Título", name: "title", widget: "string"},
-              {label: "Descripción", name: "description", widget: "string"},
-              {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
-              {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
-              {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
-              {label: "Contenido", name: "body", widget: "markdown"}
-            ]
-          }
-        ]
-      };
-    } else {
-      // Configuración para producción con GitHub
-      config = {
-        backend: {
-          name: 'github',
-          repo: 'facuvar/wallu-resources',
-          branch: 'main',
-          use_graphql: true
-        },
-        media_folder: "public/images/uploads",
-        public_folder: "/images/uploads",
-        collections: [
-          {
-            name: "blog",
-            label: "Posts del Blog",
-            folder: "src/content/blog",
-            create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-            fields: [
-              {label: "Título", name: "title", widget: "string"},
-              {label: "Descripción", name: "description", widget: "string"},
-              {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
-              {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
-              {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
-              {label: "Contenido", name: "body", widget: "markdown"}
-            ]
-          }
-        ]
-      };
+    // Esperar a que CMS esté disponible
+    function initCMS() {
+      if (typeof window.CMS === 'undefined' || !window.CMS.init) {
+        console.log('Esperando a que CMS se cargue...');
+        setTimeout(initCMS, 100);
+        return;
+      }
+      
+      let config;
+      
+      if (isLocal) {
+        // Configuración para desarrollo local
+        config = {
+          backend: {
+            name: 'test-repo',
+          },
+          local_backend: true,
+          media_folder: "public/images/uploads",
+          public_folder: "/images/uploads",
+          collections: [
+            {
+              name: "blog",
+              label: "Posts del Blog",
+              folder: "src/content/blog",
+              create: true,
+              slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+              fields: [
+                {label: "Título", name: "title", widget: "string"},
+                {label: "Descripción", name: "description", widget: "string"},
+                {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+                {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+                {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
+                {label: "Contenido", name: "body", widget: "markdown"}
+              ]
+            }
+          ]
+        };
+      } else {
+        // Configuración para producción con GitHub
+        config = {
+          backend: {
+            name: 'github',
+            repo: 'facuvar/wallu-resources',
+            branch: 'main'
+          },
+          media_folder: "public/images/uploads",
+          public_folder: "/images/uploads",
+          collections: [
+            {
+              name: "blog",
+              label: "Posts del Blog",
+              folder: "src/content/blog",
+              create: true,
+              slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+              fields: [
+                {label: "Título", name: "title", widget: "string"},
+                {label: "Descripción", name: "description", widget: "string"},
+                {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+                {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+                {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
+                {label: "Contenido", name: "body", widget: "markdown"}
+              ]
+            }
+          ]
+        };
+      }
+      
+      console.log('Configuración del CMS:', isLocal ? 'desarrollo local' : 'producción GitHub');
+      
+      try {
+        window.CMS.init({ config: config });
+        console.log('CMS inicializado correctamente');
+      } catch (error) {
+        console.error('Error al inicializar CMS:', error);
+      }
     }
     
-    console.log('Configuración del CMS:', isLocal ? 'desarrollo local' : 'producción GitHub');
-    
-    try {
-      window.CMS.init({ config: config });
-      console.log('CMS inicializado correctamente');
-    } catch (error) {
-      console.error('Error al inicializar CMS:', error);
+    // Iniciar cuando todo esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCMS);
+    } else {
+      initCMS();
     }
   </script>
 </body>
