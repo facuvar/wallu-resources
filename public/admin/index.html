@@ -6,19 +6,15 @@
   <title>Admin</title>
 </head>
 <body>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script>
+  <script type="module">
+    import { CMS } from 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js'
+    
     CMS.init({
       config: {
         backend: {
           name: 'github',
           repo: 'facuvar/wallu-resources',
-          branch: 'main',
-          base_url: 'https://resources.wallu.app',
-          auth_endpoint: 'api/auth'
+          branch: 'main'
         },
         media_folder: "public/images/uploads",
         public_folder: "/images/uploads",
@@ -40,7 +36,7 @@
           }
         ]
       }
-    });
+    })
   </script>
 </body>
 </html>
