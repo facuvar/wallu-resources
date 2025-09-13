@@ -4,12 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && tinacms build",
     "preview": "astro preview",
     "astro": "astro",
-    "cms": "npx netlify-cms-proxy-server",
-    "tina:build": "tinacms build",
-    "postbuild": "tinacms build"
+    "cms": "npx netlify-cms-proxy-server"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",
