@@ -2,6 +2,7 @@
 title: 'Mi primer post en el blog'
 description: 'Este es mi primer post en el blog de Wallu Resources'
 pubDate: '2024-09-13'
+heroImage: '/images/blog/test-image.png'
 ---
 
 # Mi primer post
