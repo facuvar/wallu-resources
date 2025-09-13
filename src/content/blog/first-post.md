@@ -2,7 +2,7 @@
 title: 'Crear y ganar dinero con E-books'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 08 2022'
-heroImage: '/blog-placeholder-1.jpg'
+heroImage: '/images/ebook-post.jpg'
 ---
 
 En un mundo cada vez mas digital, los ebooks se convirtieron en una de las formas mas accesibles de compartir conocimiento y generar ingresos. Tanto si sos experto en un tema especifico, escritor en crecimiento o simplemente queres emprender online, autopublicar un ebook puede abrirte nuevas oportunidades.
