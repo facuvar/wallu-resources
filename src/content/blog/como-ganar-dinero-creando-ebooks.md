@@ -2,7 +2,7 @@
 title: 'Cómo ganar dinero creando y vendiendo ebooks en Internet'
 description: 'Descubrí cómo transformar tus conocimientos e ideas en ingresos pasivos mediante la creación y venta de ebooks. Desde la elección del tema hasta las plataformas de publicación, te contamos los pasos clave para empezar a generar dinero online.'
 pubDate: 'Sep 12 2025'
-heroImage: '../../assets/ebook-post.jpg'
+heroImage: '../assets/ebook-post.jpg'
 ---
 
 Aquí vas a encontrar una guía práctica para empezar a **crear, publicar y vender ebooks**.  
@@ -45,4 +45,3 @@ Crear y vender ebooks no solo es una oportunidad de negocio digital, sino tambi�
 ### Syntax
 
 ```markdown
-![Portada ebook](../../assets/ebook-post.jpg)
