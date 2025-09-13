@@ -13,75 +13,84 @@
   <div id="nc-root"></div>
   
   <script>
-    // Interceptar cualquier intento de cargar config.yml
-    const originalFetch = window.fetch;
-    window.fetch = function(url, options) {
-      if (url.includes('config.yml')) {
-        console.log('Interceptando carga de config.yml, usando configuración manual');
-        return Promise.reject(new Error('Usando configuración manual'));
-      }
-      return originalFetch.apply(this, arguments);
-    };
-    
     // Configuración manual completa
     window.CMS_MANUAL_INIT = true;
   </script>
   
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
-    console.log('Iniciando CMS con configuración manual...');
+    console.log('Iniciando Decap CMS...');
     
-    // Configuración diferente para desarrollo vs producción
+    // Detectar si estamos en desarrollo local
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     
-    const config = {
-      backend: isLocal ? {
-        name: 'test-repo', // Para desarrollo local
-      } : {
-        name: 'github', // Para producción
-        repo: 'facuvar/wallu-resources',
-        branch: 'main',
-        base_url: window.location.origin,
-        auth_endpoint: 'api/auth'
-      },
-      local_backend: isLocal,
-      media_folder: "public/images/uploads",
-      public_folder: "/images/uploads",
-      collections: [
-        {
-          name: "blog",
-          label: "Posts del Blog",
-          folder: "src/content/blog",
-          create: true,
-          slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-          fields: [
-            {label: "Título", name: "title", widget: "string"},
-            {label: "Descripción", name: "description", widget: "string"},
-            {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
-            {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
-            {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
-            {label: "Contenido", name: "body", widget: "markdown"}
-          ]
-        }
-      ]
-    };
+    let config;
+    
+    if (isLocal) {
+      // Configuración para desarrollo local
+      config = {
+        backend: {
+          name: 'test-repo',
+        },
+        local_backend: true,
+        media_folder: "public/images/uploads",
+        public_folder: "/images/uploads",
+        collections: [
+          {
+            name: "blog",
+            label: "Posts del Blog",
+            folder: "src/content/blog",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              {label: "Título", name: "title", widget: "string"},
+              {label: "Descripción", name: "description", widget: "string"},
+              {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+              {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+              {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
+              {label: "Contenido", name: "body", widget: "markdown"}
+            ]
+          }
+        ]
+      };
+    } else {
+      // Configuración para producción con GitHub
+      config = {
+        backend: {
+          name: 'github',
+          repo: 'facuvar/wallu-resources',
+          branch: 'main'
+        },
+        media_folder: "public/images/uploads",
+        public_folder: "/images/uploads",
+        collections: [
+          {
+            name: "blog",
+            label: "Posts del Blog",
+            folder: "src/content/blog",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              {label: "Título", name: "title", widget: "string"},
+              {label: "Descripción", name: "description", widget: "string"},
+              {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+              {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+              {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
+              {label: "Contenido", name: "body", widget: "markdown"}
+            ]
+          }
+        ]
+      };
+    }
+    
+    console.log('Configuración del CMS:', isLocal ? 'desarrollo local' : 'producción GitHub');
     
     try {
       window.CMS.init({ config: config });
       console.log('CMS inicializado correctamente');
     } catch (error) {
       console.error('Error al inicializar CMS:', error);
-      
-      // Retry después de un breve delay
-      setTimeout(() => {
-        try {
-          window.CMS.init({ config: config });
-          console.log('CMS inicializado en segundo intento');
-        } catch (retryError) {
-          console.error('Error en segundo intento:', retryError);
-        }
-      }, 1000);
     }
   </script>
 </body>
