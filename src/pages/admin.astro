@@ -32,11 +32,20 @@
   <script>
     console.log('Iniciando CMS con configuración manual...');
     
+    // Configuración diferente para desarrollo vs producción
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
     const config = {
-      backend: {
-        name: 'test-repo', // Backend de prueba para desarrollo local
+      backend: isLocal ? {
+        name: 'test-repo', // Para desarrollo local
+      } : {
+        name: 'github', // Para producción
+        repo: 'facuvar/wallu-resources',
+        branch: 'main',
+        base_url: window.location.origin,
+        auth_endpoint: 'api/auth'
       },
-      local_backend: true,
+      local_backend: isLocal,
       media_folder: "public/images/uploads",
       public_folder: "/images/uploads",
       collections: [
