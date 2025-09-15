@@ -66,11 +66,12 @@ const { currentLang } = Astro.props;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 1000;
     min-width: 120px;
   }
 
-  .language-selector:hover .lang-dropdown {
+  .language-selector:hover .lang-dropdown,
+  .language-selector.open .lang-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -126,6 +127,37 @@ const { currentLang } = Astro.props;
         localStorage.setItem('preferred-language', 'es');
       }
     }
+    
+    // Handle language selector toggle
+    document.querySelectorAll('.language-selector').forEach(selector => {
+      const toggle = selector.querySelector('.lang-toggle');
+      const dropdown = selector.querySelector('.lang-dropdown');
+      
+      if (toggle && dropdown) {
+        // Toggle dropdown on click
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Close other open dropdowns
+          document.querySelectorAll('.language-selector').forEach(otherSelector => {
+            if (otherSelector !== selector) {
+              otherSelector.classList.remove('open');
+            }
+          });
+          
+          // Toggle current dropdown
+          selector.classList.toggle('open');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!selector.contains(e.target as Node)) {
+            selector.classList.remove('open');
+          }
+        });
+      }
+    });
     
     // Store language preference when clicking language options
     document.querySelectorAll('.lang-option').forEach(link => {
