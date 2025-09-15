@@ -56,6 +56,9 @@ const t = getTranslations('es');
 				max-width: 1200px;
 				margin: 0 auto;
 				padding: 2rem 1rem;
+				box-sizing: border-box;
+				overflow-x: hidden;
+				width: 100%;
 			}
 
 			.hero {
@@ -147,8 +150,10 @@ const t = getTranslations('es');
 
 			.features-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 				gap: 2rem;
+				width: 100%;
+				box-sizing: border-box;
 			}
 
 			.feature {
@@ -157,6 +162,9 @@ const t = getTranslations('es');
 				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 				border: 1px solid #f0f0f0;
 				text-align: center;
+				box-sizing: border-box;
+				width: 100%;
+				max-width: 100%;
 			}
 
 			.feature h3 {
@@ -235,14 +243,18 @@ const t = getTranslations('es');
 
 			@media (max-width: 480px) {
 				main {
-					padding: 1rem 0.5rem;
-					max-width: calc(100% - 1rem);
+					padding: 1rem 0.75rem;
+					max-width: 100%;
+					width: 100%;
+					box-sizing: border-box;
 				}
 				
 				.hero {
-					padding: 2rem 0.5rem;
+					padding: 2rem 1rem;
 					margin-bottom: 2rem;
 					border-radius: 12px;
+					box-sizing: border-box;
+					width: 100%;
 				}
 				
 				.hero h1 {
@@ -257,11 +269,20 @@ const t = getTranslations('es');
 				.btn-primary, .btn-secondary, .btn-outline {
 					padding: 0.8rem 1.5rem;
 					font-size: 0.9rem;
+					box-sizing: border-box;
+				}
+				
+				.features-grid {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+					padding: 0;
 				}
 				
 				.feature {
-					padding: 1rem;
+					padding: 1.5rem 1rem;
 					margin: 0;
+					width: 100%;
+					box-sizing: border-box;
 				}
 				
 				.feature h3 {
@@ -269,8 +290,10 @@ const t = getTranslations('es');
 				}
 				
 				.blog-preview {
-					padding: 1.5rem 0.5rem;
+					padding: 1.5rem 1rem;
 					margin: 0;
+					box-sizing: border-box;
+					width: 100%;
 				}
 				
 				.blog-preview h2 {
