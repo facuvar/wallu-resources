@@ -1,6 +1,6 @@
 ---
-title: 'Título optimizado para SEO con palabra clave principal'
-description: 'Descripción clara y concisa (máx. 160 caracteres) con la palabra clave y llamada a la acción.'
+title: 'Guía SEO para crear contenido optimizado'
+description: 'Aprende a crear contenido optimizado para motores de búsqueda que genere más tráfico y conversiones.'
 pubDate: '2025-09-15'
 author: 'Wallu Team'
 heroImage: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop'
@@ -8,53 +8,69 @@ language: 'es'
 tags: ['seo', 'tutorial', 'wallu']
 ---
 
-# Título principal (H1 con palabra clave)
+# Guía completa de SEO para crear contenido optimizado
 
-Texto introductorio atractivo que explique el tema del artículo y contenga la **palabra clave principal** dentro de las primeras 100 palabras.  
-Ejemplo: En este post vamos a contarte cómo *crear ebooks con inteligencia artificial* para aumentar tus ingresos online.
-
----
-
-## Subtítulo Sección 1 (H2 con variación de palabra clave)
-
-Explicación inicial. Podés usar listas para mejorar la legibilidad:
-
-- **Beneficio 1:** rápido de implementar.  
-- **Beneficio 2:** optimizado para SEO.  
-- **Beneficio 3:** escalable a cualquier negocio.
+En esta guía vas a aprender cómo crear contenido que los motores de búsqueda amen y que tu audiencia encuentre útil. La clave está en combinar **optimización técnica** con *valor real* para los usuarios.
 
 ---
 
-### Subtítulo Sección 1.1 (H3 con sinónimo)
+## ¿Por qué es importante el SEO en tu contenido?
 
-Aquí podés profundizar en detalles más técnicos o ejemplos concretos.  
-Por ejemplo: *Markdown* permite resaltar con **negrita**, *cursiva* y hasta ~~tachado~~.
+El SEO no es solo sobre motores de búsqueda, es sobre crear contenido que:
 
----
-
-## Subtítulo Sección 2 (H2 con palabra clave secundaria)
-
-Texto que expanda el tema. Podés sumar una cita para dar autoridad:
-
-> "El contenido bien estructurado ayuda a los motores de búsqueda a entender mejor tu página." – Expertos en SEO
+- **Resuelve problemas reales** de tu audiencia  
+- **Se encuentra fácilmente** cuando las personas lo necesitan  
+- **Genera confianza** con información precisa y útil
 
 ---
 
-## Preguntas Frecuentes (FAQ con H2)
+### Elementos clave de contenido SEO
 
-### ¿Cómo ayuda esto al SEO? (H3 con formato de pregunta)
+Para que tu contenido funcione bien, necesita:
 
-Respuesta breve y clara con la palabra clave.  
-
-### ¿Qué ventajas tiene usar Astro con Markdown? (H3)
-
-Podés integrar APIs, CMS headless y mantener un sitio **rápido y ligero**.
+1. **Palabra clave principal** clara y relevante
+2. **Estructura jerárquica** con H1, H2, H3
+3. **Enlaces internos** a contenido relacionado
+4. **Meta descripción** atractiva
 
 ---
 
-## Conclusión (H2)
+## Cómo crear títulos que atraen clicks
 
-Un resumen final con **call to action**:  
-¿Querés empezar a crear tu ebook hoy mismo? 🚀 Visitá [Wallu.app](https://wallu.app) y empezá gratis.
+Un buen título debe:
+
+> "Combinar la palabra clave con una promesa de valor clara y específica."
+
+Ejemplos efectivos:
+- ✅ "Cómo crear ebooks que generen $1000/mes"
+- ✅ "5 errores que matan las ventas de tu ebook"
+- ❌ "Todo sobre ebooks" (muy vago)
+
+---
+
+## Preguntas frecuentes sobre SEO
+
+### ¿Cuántas palabras debe tener un artículo?
+
+No hay un número mágico, pero el contenido debe ser **completo** y **útil**. Generalmente:
+- Posts informativos: 1500-3000 palabras
+- Guías técnicas: 2000-5000 palabras
+- Posts de noticias: 500-1000 palabras
+
+### ¿Cómo medir el éxito del SEO?
+
+Métricas importantes:
+1. **Tráfico orgánico** (Google Analytics)
+2. **Rankings de palabras clave** (herramientas SEO)
+3. **Tiempo en página** (engagement)
+4. **Tasa de conversión** (objetivos de negocio)
+
+---
+
+## Conclusión: SEO que funciona en 2025
+
+El SEO moderno es sobre **crear valor real** para las personas. Si tu contenido resuelve problemas y responde preguntas importantes, los motores de búsqueda lo recompensarán.
+
+¿Listo para crear contenido que rankee? 🚀 Empieza aplicando estos consejos en tu próximo post para [Wallu.app](https://wallu.app).
 
 ---
