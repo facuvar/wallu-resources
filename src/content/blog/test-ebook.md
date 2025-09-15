@@ -61,5 +61,3 @@ Podés publicarlos en tu propio perfil de *Wallu* y compartirlos en tus redes so
 Crear y vender ebooks nunca fue tan sencillo. Con **Wallu**, transformás tus ideas en ingresos de manera ágil, profesional y escalable.  
 
 Empezá hoy mismo en [Wallu.app](https://wallu.app) y lanzá tu primer ebook con la ayuda de la inteligencia artificial.
-
-
