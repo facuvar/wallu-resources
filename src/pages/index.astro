@@ -1,7 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import HeaderSimple from '../components/HeaderSimple.astro';
+import Header from '../components/Header.astro';
 import { getTranslations } from '../i18n/translations';
 
 const t = getTranslations('es');
@@ -13,7 +13,7 @@ const t = getTranslations('es');
 		<BaseHead title={t.site.title} description={t.site.description} />
 	</head>
 	<body>
-		<HeaderSimple />
+		<Header />
 		<main>
 			<section class="hero">
 				<h1>📚 {t.home.title}</h1>
