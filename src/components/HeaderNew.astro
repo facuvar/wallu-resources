@@ -108,9 +108,63 @@ const t = getTranslations(currentLang);
 	.social-links a {
 		display: flex;
 	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
 	@media (max-width: 720px) {
+		header {
+			padding: 0 0.5em;
+		}
+		
+		nav {
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+		
+		.logo img {
+			height: 32px;
+		}
+		
+		.internal-links {
+			order: 3;
+			width: 100%;
+			justify-content: center;
+			gap: 0.2rem;
+		}
+		
+		.internal-links a {
+			padding: 0.5em 0.3em;
+			font-size: 0.9rem;
+		}
+		
 		.social-links {
-			display: none;
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
+		
+		.social-links a {
+			padding: 0.5em 0.2em;
+		}
+		
+		.social-links svg {
+			width: 24px !important;
+			height: 24px !important;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.internal-links a {
+			padding: 0.4em 0.2em;
+			font-size: 0.85rem;
+		}
+		
+		.social-links svg {
+			width: 20px !important;
+			height: 20px !important;
 		}
 	}
 </style>
