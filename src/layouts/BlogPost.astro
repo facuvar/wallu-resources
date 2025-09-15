@@ -5,13 +5,29 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { getTranslations, type Language } from '../i18n/translations';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// Get current language from URL
+const currentPath = Astro.url.pathname;
+let currentLang: Language = 'es';
+let blogUrl = '/blog';
+
+if (currentPath.startsWith('/en/')) {
+  currentLang = 'en';
+  blogUrl = '/en/blog';
+} else if (currentPath.startsWith('/pt/')) {
+  currentLang = 'pt';
+  blogUrl = '/pt/blog';
+}
+
+const t = getTranslations(currentLang);
 ---
 
-<html lang="en">
+<html lang={currentLang}>
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
@@ -22,35 +38,127 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.hero-image {
 				width: 100%;
+				margin-bottom: 2rem;
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+				transition: transform 0.3s ease;
+			}
+			.hero-image img:hover {
+				transform: scale(1.02);
 			}
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
+				padding: 2rem;
 				color: rgb(var(--gray-dark));
+				background: white;
+				border-radius: 12px;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+				line-height: 1.7;
+			}
+			.prose h1, .prose h2, .prose h3 {
+				color: #2d3748;
+			}
+			.prose h2 {
+				border-bottom: 2px solid #667eea;
+				padding-bottom: 0.5rem;
+				margin-top: 2rem;
+			}
+			.prose h3 {
+				color: #667eea;
+				margin-top: 1.5rem;
+			}
+			.prose a {
+				color: #667eea;
+				text-decoration: none;
+				border-bottom: 1px solid transparent;
+				transition: border-color 0.3s ease;
+			}
+			.prose a:hover {
+				border-bottom-color: #667eea;
+			}
+			.prose code {
+				background: #f7fafc;
+				padding: 0.2rem 0.4rem;
+				border-radius: 4px;
+				font-size: 0.9em;
+				border: 1px solid #e2e8f0;
+			}
+			.prose blockquote {
+				border-left: 4px solid #667eea;
+				padding-left: 1rem;
+				margin: 1.5rem 0;
+				font-style: italic;
+				background: #f8f9ff;
+				padding: 1rem;
+				border-radius: 0 8px 8px 0;
+			}
+			.prose ul, .prose ol {
+				margin: 1rem 0;
+				padding-left: 1.5rem;
+			}
+			.prose li {
+				margin: 0.5rem 0;
 			}
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+				margin-bottom: 2rem;
+				padding: 2rem 0;
 				text-align: center;
-				line-height: 1;
+				line-height: 1.2;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				border-radius: 12px;
+				margin-top: -2rem;
+				margin-left: -2rem;
+				margin-right: -2rem;
+				padding: 3rem 2rem;
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 1rem 0;
+				font-size: 2.5rem;
+				font-weight: bold;
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin-bottom: 0.5rem;
+				color: rgba(255, 255, 255, 0.9);
+				font-size: 1rem;
 			}
 			.last-updated-on {
 				font-style: italic;
+				opacity: 0.8;
+			}
+			.back-to-blog {
+				display: inline-block;
+				margin: 2rem auto;
+				padding: 0.8rem 1.5rem;
+				background: #667eea;
+				color: white;
+				text-decoration: none;
+				border-radius: 8px;
+				transition: all 0.3s ease;
+				text-align: center;
+			}
+			.back-to-blog:hover {
+				background: #5a67d8;
+				transform: translateY(-2px);
+			}
+			@media (max-width: 768px) {
+				.title h1 {
+					font-size: 2rem;
+				}
+				.prose {
+					padding: 1rem;
+				}
+				.title {
+					margin-left: -1rem;
+					margin-right: -1rem;
+					padding: 2rem 1rem;
+				}
 			}
 		</style>
 	</head>
@@ -69,15 +177,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										{t.blog.lastUpdated} <FormattedDate date={updatedDate} />
 									</div>
 								)
 							}
 						</div>
 						<h1>{title}</h1>
-						<hr />
 					</div>
 					<slot />
+					<div style="text-align: center; margin-top: 3rem;">
+						<a href={blogUrl} class="back-to-blog">{t.blog.backToBlog}</a>
+					</div>
 				</div>
 			</article>
 		</main>

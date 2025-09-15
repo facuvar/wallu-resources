@@ -1,0 +1,140 @@
+---
+import { languages, type Language } from '../i18n/translations';
+
+export interface Props {
+  currentLang: Language;
+}
+
+const { currentLang } = Astro.props;
+---
+
+<div class="language-selector">
+  <button class="lang-toggle" aria-label="Cambiar idioma">
+    <span class="current-lang">{languages[currentLang]}</span>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>
+  </button>
+  <div class="lang-dropdown">
+    {Object.entries(languages).map(([code, name]) => (
+      <a 
+        href={code === 'es' ? '/' : `/${code}/`}
+        class={`lang-option ${code === currentLang ? 'active' : ''}`}
+        data-lang={code}
+      >
+        {name}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .language-selector {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(var(--black), 20%);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: rgb(var(--black));
+    transition: all 0.3s ease;
+  }
+
+  .lang-toggle:hover {
+    background: rgba(var(--accent), 10%);
+    border-color: rgba(var(--accent), 40%);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: white;
+    border: 1px solid rgba(var(--black), 20%);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    min-width: 120px;
+  }
+
+  .language-selector:hover .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: rgb(var(--black));
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    margin: 0.25rem;
+  }
+
+  .lang-option:hover {
+    background: rgba(var(--accent), 10%);
+  }
+
+  .lang-option.active {
+    background: rgba(var(--accent), 15%);
+    color: rgb(var(--accent));
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .lang-toggle {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+    
+    .lang-dropdown {
+      right: -1rem;
+    }
+  }
+</style>
+
+<script>
+  // Client-side language detection and redirect
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const hasLanguagePrefix = /^\/(en|pt)\//.test(currentPath);
+    
+    // Only redirect if we're on the root page and don't have a language preference stored
+    if (currentPath === '/' && !localStorage.getItem('preferred-language')) {
+      const browserLang = navigator.language.split('-')[0];
+      
+      if (browserLang === 'en' || browserLang === 'pt') {
+        localStorage.setItem('preferred-language', browserLang);
+        window.location.href = `/${browserLang}/`;
+      } else {
+        localStorage.setItem('preferred-language', 'es');
+      }
+    }
+    
+    // Store language preference when clicking language options
+    document.querySelectorAll('.lang-option').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const lang = (e.target as HTMLElement).getAttribute('data-lang');
+        if (lang) {
+          localStorage.setItem('preferred-language', lang);
+        }
+      });
+    });
+  });
+</script>

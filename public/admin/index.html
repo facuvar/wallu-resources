@@ -1,21 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin - Wallu Resources</title>
-  <link href="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.css" rel="stylesheet" />
+  <title>Admin</title>
 </head>
 <body>
-  <script>
-    // Configuración inmediata
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  
-  <script>
-    // Configuración directa para GitHub
-    window.CMS.init({
+  <script type="module">
+    import { CMS } from 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js'
+    
+    CMS.init({
       config: {
         backend: {
           name: 'github',
@@ -35,12 +29,14 @@
               {label: "Título", name: "title", widget: "string"},
               {label: "Descripción", name: "description", widget: "string"},
               {label: "Fecha de publicación", name: "pubDate", widget: "datetime"},
+              {label: "Fecha de actualización", name: "updatedDate", widget: "datetime", required: false},
+              {label: "Imagen destacada", name: "heroImage", widget: "image", required: false},
               {label: "Contenido", name: "body", widget: "markdown"}
             ]
           }
         ]
       }
-    });
+    })
   </script>
 </body>
 </html>

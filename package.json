@@ -4,17 +4,21 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run translate-posts && astro build",
+    "build:no-translate": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "cms": "npx netlify-cms-proxy-server"
+    "cms": "npx netlify-cms-proxy-server",
+    "translate-posts": "node scripts/translate-posts.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.5.1",
     "astro": "^5.13.7",
+    "dotenv": "^16.4.5",
     "netlify-cms-app": "^2.15.72",
+    "openai": "^4.67.3",
     "sharp": "^0.34.3"
   },
   "devDependencies": {

@@ -1,22 +1,22 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { getTranslations } from '../../i18n/translations';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { getTranslations } from '../../../i18n/translations';
 
-const t = getTranslations('es');
+const t = getTranslations('en');
 
 const allPosts = await getCollection('blog');
 const posts = allPosts
-	.filter(post => post.data.language === 'es')
+	.filter(post => post.data.language === 'en')
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<BaseHead title={`Blog - ${t.site.title}`} description={t.site.description} />
 		<style>
@@ -143,14 +143,14 @@ const posts = allPosts
 		<main>
 			<div class="page-title">
 				<h1>📝 Blog</h1>
-				<p>Recursos, tutoriales y guías para crear ebooks con inteligencia artificial</p>
+				<p>Resources, tutorials and guides for creating ebooks with AI</p>
 			</div>
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={`/en/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage} alt="" />
 									)}

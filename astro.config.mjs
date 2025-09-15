@@ -8,6 +8,13 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: process.env.ASTRO_SITE_URL || 'https://resources.wallu.app',
 	integrations: [mdx(), sitemap()],
+	i18n: {
+		defaultLocale: 'es',
+		locales: ['es', 'en', 'pt'],
+		routing: {
+			prefixDefaultLocale: false
+		}
+	},
 	// Optimizaciones para producción
 	output: 'static',
 	build: {
