@@ -4,6 +4,7 @@ description: 'Descubrí cómo generar ingresos creando y vendiendo ebooks con in
 pubDate: '2025-09-15'
 author: 'Wallu Team'
 tags: ['ebooks', 'marketing digital', 'wallu']
+heroImage: 'https://images.unsplash.com/photo-1611328857214-a5aae689f21a?w=800&h=400&fit=crop'
 ---
 
 # Crear ebooks y venderlos con Wallu: la forma más simple de generar ingresos online
@@ -60,4 +61,5 @@ Podés publicarlos en tu propio perfil de *Wallu* y compartirlos en tus redes so
 Crear y vender ebooks nunca fue tan sencillo. Con **Wallu**, transformás tus ideas en ingresos de manera ágil, profesional y escalable.  
 
 Empezá hoy mismo en [Wallu.app](https://wallu.app) y lanzá tu primer ebook con la ayuda de la inteligencia artificial.
+
 
