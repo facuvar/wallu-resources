@@ -44,8 +44,8 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: 100%;
+	max-width: 720px;
 	margin: auto;
 	padding: 3em 1em;
 }
@@ -104,6 +104,13 @@ img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Imágenes en contenido de blog */
+.prose img {
+	margin: 1.5em auto;
 }
 code {
 	padding: 2px 5px;
@@ -125,41 +132,111 @@ pre > code {
 	}
 	
 	main {
-		padding: 2em 0.5em;
+		padding: 2em 1rem;
+		max-width: calc(100% - 2rem);
 	}
 	
 	h1 {
 		font-size: 2.5em;
+		line-height: 1.1;
 	}
 	
 	h2 {
 		font-size: 2em;
+		line-height: 1.2;
 	}
 	
 	h3 {
 		font-size: 1.6em;
+	}
+	
+	/* Mejorar espaciado en listas */
+	ul, ol {
+		padding-left: 1.5rem;
+	}
+	
+	/* Hacer que las tablas sean responsivas */
+	table {
+		font-size: 0.9em;
+		overflow-x: auto;
+		display: block;
+		white-space: nowrap;
+	}
+	
+	/* Mejorar blockquotes en móvil */
+	blockquote {
+		margin: 1em 0;
+		padding-left: 1rem;
+		font-size: 1.1em;
 	}
 }
 
 @media screen and (max-width: 480px) {
 	body {
 		font-size: 16px;
+		line-height: 1.6;
 	}
 	
 	main {
-		padding: 1.5em 0.5em;
+		padding: 1.5rem 0.75rem;
+		max-width: calc(100% - 1.5rem);
 	}
 	
 	h1 {
 		font-size: 2em;
+		line-height: 1.1;
+		margin-bottom: 1rem;
 	}
 	
 	h2 {
 		font-size: 1.6em;
+		line-height: 1.2;
+		margin-bottom: 0.8rem;
 	}
 	
 	h3 {
 		font-size: 1.3em;
+		margin-bottom: 0.6rem;
+	}
+	
+	h4 {
+		font-size: 1.1em;
+	}
+	
+	h5, h6 {
+		font-size: 1em;
+	}
+	
+	/* Párrafos más compactos */
+	p {
+		margin-bottom: 1.2em;
+	}
+	
+	.prose p {
+		margin-bottom: 1.5em;
+	}
+	
+	/* Listas más compactas */
+	ul, ol {
+		padding-left: 1.2rem;
+		margin-bottom: 1.2em;
+	}
+	
+	/* Tablas en móviles muy pequeños */
+	table {
+		font-size: 0.8em;
+	}
+	
+	/* Blockquotes más pequeños */
+	blockquote {
+		font-size: 1em;
+		padding-left: 0.8rem;
+		margin: 0.8em 0;
+	}
+	
+	/* Formularios más amigables en móvil */
+	input, textarea {
+		font-size: 16px; /* Evita zoom en iOS */
 	}
 }
 blockquote {

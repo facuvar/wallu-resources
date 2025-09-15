@@ -148,16 +148,94 @@ const t = getTranslations(currentLang);
 				transform: translateY(-2px);
 			}
 			@media (max-width: 768px) {
+				main {
+					width: 100%;
+					padding: 0;
+				}
+				
+				.hero-image {
+					margin-bottom: 1rem;
+					padding: 0 1rem;
+				}
+				
+				.prose {
+					width: 100%;
+					max-width: 100%;
+					margin: 0;
+					padding: 1.5rem;
+					border-radius: 0;
+					box-shadow: none;
+				}
+				
+				.title {
+					margin-left: -1.5rem;
+					margin-right: -1.5rem;
+					padding: 2rem 1.5rem;
+					margin-top: -1.5rem;
+				}
+				
 				.title h1 {
 					font-size: 2rem;
+					line-height: 1.2;
 				}
+				
+				.back-to-blog {
+					margin: 2rem 0;
+					display: block;
+					width: fit-content;
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+			
+			@media (max-width: 480px) {
 				.prose {
 					padding: 1rem;
 				}
+				
 				.title {
 					margin-left: -1rem;
 					margin-right: -1rem;
-					padding: 2rem 1rem;
+					padding: 1.5rem 1rem;
+					margin-top: -1rem;
+				}
+				
+				.title h1 {
+					font-size: 1.6rem;
+					line-height: 1.1;
+				}
+				
+				.date {
+					font-size: 0.9rem;
+				}
+				
+				.prose h2 {
+					font-size: 1.4rem;
+					margin-top: 1.5rem;
+				}
+				
+				.prose h3 {
+					font-size: 1.2rem;
+					margin-top: 1rem;
+				}
+				
+				.prose p {
+					margin-bottom: 1.2rem;
+				}
+				
+				.prose ul, .prose ol {
+					padding-left: 1.2rem;
+				}
+				
+				.prose blockquote {
+					padding: 0.8rem;
+					margin: 1rem 0;
+					font-size: 0.95rem;
+				}
+				
+				.back-to-blog {
+					padding: 0.7rem 1.2rem;
+					font-size: 0.9rem;
 				}
 			}
 		</style>
