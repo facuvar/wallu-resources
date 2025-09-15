@@ -178,8 +178,8 @@ pre > code {
 	}
 	
 	main {
-		padding: 1.5rem 0.75rem;
-		max-width: calc(100% - 1.5rem);
+		padding: 1.5rem 0.5rem;
+		max-width: calc(100% - 1rem);
 	}
 	
 	h1 {
