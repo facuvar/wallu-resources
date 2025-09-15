@@ -232,14 +232,19 @@ async function translatePosts() {
         
       } catch (error) {
         console.error(`❌ Error processing ${file}:`, error.message);
+        if (error.message.includes('exceeded your current quota')) {
+          console.log('💳 OpenAI quota exceeded - skipping remaining translations');
+          break; // Stop trying to translate more files
+        }
       }
     }
     
     console.log('🎉 Translation process completed!');
     
   } catch (error) {
-    console.error('❌ Error in translation process:', error);
-    process.exit(1);
+    console.error('❌ Error in translation process:', error.message);
+    console.log('⚠️  Continuing with build - translations will be skipped');
+    // Don't exit with error code to allow build to continue
   }
 }
 
