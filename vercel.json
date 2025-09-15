@@ -5,7 +5,8 @@
   "installCommand": "npm install",
   "framework": "astro",
   "env": {
-    "ASTRO_SITE_URL": "https://resources.wallu.app"
+    "ASTRO_SITE_URL": "https://resources.wallu.app",
+    "CACHE_BUST": "2024-09-15-fix"
   },
   "headers": [
     {

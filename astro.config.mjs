@@ -21,6 +21,8 @@ export default defineConfig({
 		assets: 'assets'
 	},
 	compressHTML: true,
+	// Forzar rebuild limpio
+	cacheDir: './.astro-cache-' + (process.env.CACHE_BUST || 'default'),
 	// Configuración para desarrollo local con Decap CMS
 	vite: {
 		server: {
