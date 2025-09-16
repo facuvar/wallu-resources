@@ -1,10 +1,11 @@
 ---
 title: 'Esta nota deberia ser traducida automaticamente a EN y PT'
-description: 'Prueba de nota que deberia generarse sola en otros idiomas.'
+description: 'Descubrí cómo generar ingresos creando y vendiendo ebooks con inteligencia artificial en Wallu de manera simple y rápida.'
 pubDate: '2025-09-15'
 author: 'Wallu Team'
 tags: ['ebooks', 'marketing digital', 'wallu']
 heroImage: 'https://images.unsplash.com/photo-1611328857214-a5aae689f21a?w=800&h=400&fit=crop'
+language: 'es'
 ---
 
 # Crear ebooks y venderlos con Wallu: la forma más simple de generar ingresos online
