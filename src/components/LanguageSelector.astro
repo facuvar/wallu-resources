@@ -6,31 +6,60 @@ export interface Props {
 }
 
 const { currentLang } = Astro.props;
-
-// Generate unique ID for this instance
-const selectorId = `lang-selector-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class="language-selector" id={selectorId}>
-  <button class="lang-toggle" type="button" aria-label="Cambiar idioma" aria-expanded="false">
+<div class="language-selector">
+  <button class="lang-toggle" type="button" onclick="toggleLanguageDropdown(this)">
     <span class="current-lang">{languages[currentLang]}</span>
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" class="dropdown-arrow">
-      <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/>
-    </svg>
+    <span class="dropdown-arrow">▼</span>
   </button>
-  <div class="lang-dropdown" role="menu">
+  <div class="lang-dropdown">
     {Object.entries(languages).map(([code, name]) => (
       <a 
         href={code === 'es' ? '/' : `/${code}/`}
         class={`lang-option ${code === currentLang ? 'active' : ''}`}
-        data-lang={code}
-        role="menuitem"
       >
         {name}
       </a>
     ))}
   </div>
 </div>
+
+<script is:inline>
+  window.toggleLanguageDropdown = function(button) {
+    console.log('🔄 Toggle clicked!');
+    const selector = button.closest('.language-selector');
+    const dropdown = selector.querySelector('.lang-dropdown');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.language-selector').forEach(function(otherSelector) {
+      if (otherSelector !== selector) {
+        const otherDropdown = otherSelector.querySelector('.lang-dropdown');
+        otherDropdown.style.display = 'none';
+      }
+    });
+    
+    // Toggle current dropdown
+    if (dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
+      console.log('🔒 Closed');
+    } else {
+      dropdown.style.display = 'block';
+      console.log('🔓 Opened');
+    }
+  };
+  
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.language-selector')) {
+      document.querySelectorAll('.lang-dropdown').forEach(function(dropdown) {
+        dropdown.style.display = 'none';
+      });
+    }
+  });
+  
+  console.log('✅ Language selector ready');
+</script>
 
 <style>
   .language-selector {
@@ -41,32 +70,21 @@ const selectorId = `lang-selector-${Math.random().toString(36).substr(2, 9)}`;
   .lang-toggle {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid rgba(var(--black), 20%);
+    background: white;
+    border: 1px solid #ddd;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    color: rgb(var(--black));
-    transition: all 0.3s ease;
+    color: #333;
     min-width: 120px;
-    justify-content: space-between;
   }
 
-  .lang-toggle:hover,
-  .lang-toggle:focus {
-    background: rgba(var(--accent), 10%);
-    border-color: rgba(var(--accent), 40%);
-    outline: none;
-  }
-
-  .dropdown-arrow {
-    transition: transform 0.3s ease;
-  }
-
-  .language-selector.show .dropdown-arrow {
-    transform: rotate(180deg);
+  .lang-toggle:hover {
+    background: #f5f5f5;
+    border-color: #007acc;
   }
 
   .lang-dropdown {
@@ -74,50 +92,34 @@ const selectorId = `lang-selector-${Math.random().toString(36).substr(2, 9)}`;
     top: calc(100% + 0.5rem);
     right: 0;
     background: white;
-    border: 1px solid rgba(var(--black), 20%);
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-width: 120px;
     z-index: 9999;
-    
-    /* Hidden by default */
     display: none;
-  }
-
-  .language-selector.show .lang-dropdown {
-    display: block;
-    animation: dropdownFadeIn 0.2s ease forwards;
-  }
-
-  @keyframes dropdownFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   .lang-option {
     display: block;
     padding: 0.75rem 1rem;
-    color: rgb(var(--black));
+    color: #333;
     text-decoration: none;
     font-size: 0.9rem;
-    transition: background-color 0.2s ease;
-    border-radius: 6px;
-    margin: 0.25rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .lang-option:last-child {
+    border-bottom: none;
   }
 
   .lang-option:hover {
-    background: rgba(var(--accent), 10%);
+    background: #f5f5f5;
   }
 
   .lang-option.active {
-    background: rgba(var(--accent), 15%);
-    color: rgb(var(--accent));
+    background: #007acc;
+    color: white;
     font-weight: 600;
   }
 
@@ -135,105 +137,3 @@ const selectorId = `lang-selector-${Math.random().toString(36).substr(2, 9)}`;
   }
 </style>
 
-<script>
-(() => {
-  'use strict';
-  
-  function initLanguageSelector() {
-    console.log('🌍 Initializing language selectors...');
-    
-    const selectors = document.querySelectorAll('.language-selector');
-    console.log(`Found ${selectors.length} language selector(s)`);
-    
-    selectors.forEach((selector, index) => {
-      const toggle = selector.querySelector('.lang-toggle');
-      const dropdown = selector.querySelector('.lang-dropdown');
-      
-      if (!toggle || !dropdown) {
-        console.warn(`❌ Selector ${index}: Missing toggle or dropdown`);
-        return;
-      }
-      
-      console.log(`✅ Initializing selector ${index}`);
-      
-      // Toggle dropdown on button click
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log(`🔄 Toggle ${index} clicked`);
-        
-        // Close all other dropdowns
-        selectors.forEach((otherSelector, otherIndex) => {
-          if (otherSelector !== selector) {
-            otherSelector.classList.remove('show');
-            const otherToggle = otherSelector.querySelector('.lang-toggle');
-            if (otherToggle) {
-              otherToggle.setAttribute('aria-expanded', 'false');
-            }
-          }
-        });
-        
-        // Toggle current dropdown
-        const isOpen = selector.classList.contains('show');
-        
-        if (isOpen) {
-          selector.classList.remove('show');
-          toggle.setAttribute('aria-expanded', 'false');
-          console.log(`🔒 Dropdown ${index} closed`);
-        } else {
-          selector.classList.add('show');
-          toggle.setAttribute('aria-expanded', 'true');
-          console.log(`🔓 Dropdown ${index} opened`);
-        }
-      });
-      
-      // Handle language option clicks
-      const options = selector.querySelectorAll('.lang-option');
-      options.forEach(option => {
-        option.addEventListener('click', (e) => {
-          const lang = option.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('preferred-language', lang);
-            console.log(`💾 Language preference saved: ${lang}`);
-          }
-        });
-      });
-    });
-    
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-      const clickedSelector = e.target.closest('.language-selector');
-      
-      selectors.forEach(selector => {
-        if (selector !== clickedSelector) {
-          selector.classList.remove('show');
-          const toggle = selector.querySelector('.lang-toggle');
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-        }
-      });
-    });
-    
-    // Simple browser language detection
-    const currentPath = window.location.pathname;
-    if (currentPath === '/' && !localStorage.getItem('preferred-language')) {
-      const browserLang = navigator.language.split('-')[0];
-      if (['en', 'pt'].includes(browserLang)) {
-        localStorage.setItem('preferred-language', browserLang);
-        window.location.href = `/${browserLang}/`;
-      } else {
-        localStorage.setItem('preferred-language', 'es');
-      }
-    }
-  }
-  
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLanguageSelector);
-  } else {
-    initLanguageSelector();
-  }
-})();
-</script>
