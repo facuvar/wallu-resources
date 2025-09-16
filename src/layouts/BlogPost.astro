@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/HeaderNew.astro';
 import { getTranslations, type Language } from '../i18n/translations';
+import { Calendar, ArrowLeft, Clock } from '@lucide/astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -255,10 +256,12 @@ const t = getTranslations(currentLang);
 				<div class="prose">
 					<div class="title">
 						<div class="date">
+							<Calendar size={16} style="display: inline; margin-right: 0.5rem;" />
 							<FormattedDate date={pubDate} />
 							{
 								updatedDate && (
 									<div class="last-updated-on">
+										<Clock size={14} style="display: inline; margin-right: 0.5rem;" />
 										{t.blog.lastUpdated} <FormattedDate date={updatedDate} />
 									</div>
 								)
@@ -268,7 +271,10 @@ const t = getTranslations(currentLang);
 					</div>
 					<slot />
 					<div style="text-align: center; margin-top: 3rem;">
-						<a href={blogUrl} class="back-to-blog">{t.blog.backToBlog}</a>
+						<a href={blogUrl} class="back-to-blog">
+							<ArrowLeft size={16} style="display: inline; margin-right: 0.5rem;" />
+							{t.blog.backToBlog}
+						</a>
 					</div>
 				</div>
 			</article>

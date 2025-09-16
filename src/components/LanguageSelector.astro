@@ -1,5 +1,6 @@
 ---
 import { languages, type Language } from '../i18n/translations';
+import { Flag } from '@lucide/astro';
 
 export interface Props {
   currentLang: Language;
@@ -9,130 +10,69 @@ const { currentLang } = Astro.props;
 ---
 
 <div class="language-selector">
-  <button class="lang-toggle" type="button" onclick="toggleLanguageDropdown(this)">
-    <span class="current-lang">{languages[currentLang]}</span>
-    <span class="dropdown-arrow">▼</span>
-  </button>
-  <div class="lang-dropdown">
-    {Object.entries(languages).map(([code, name]) => (
-      <a 
-        href={code === 'es' ? '/' : `/${code}/`}
-        class={`lang-option ${code === currentLang ? 'active' : ''}`}
-      >
-        {name}
-      </a>
-    ))}
-  </div>
+  <a href="/" class={`lang-link ${currentLang === 'es' ? 'active' : ''}`}>
+    <Flag size={16} />
+    <span>ES</span>
+  </a>
+  <span class="separator">|</span>
+  <a href="/en/" class={`lang-link ${currentLang === 'en' ? 'active' : ''}`}>
+    <Flag size={16} />
+    <span>EN</span>
+  </a>
+  <span class="separator">|</span>
+  <a href="/pt/" class={`lang-link ${currentLang === 'pt' ? 'active' : ''}`}>
+    <Flag size={16} />
+    <span>PT</span>
+  </a>
 </div>
 
-<script is:inline>
-  window.toggleLanguageDropdown = function(button) {
-    console.log('🔄 Toggle clicked!');
-    const selector = button.closest('.language-selector');
-    const dropdown = selector.querySelector('.lang-dropdown');
-    
-    // Close all other dropdowns
-    document.querySelectorAll('.language-selector').forEach(function(otherSelector) {
-      if (otherSelector !== selector) {
-        const otherDropdown = otherSelector.querySelector('.lang-dropdown');
-        otherDropdown.style.display = 'none';
-      }
-    });
-    
-    // Toggle current dropdown
-    if (dropdown.style.display === 'block') {
-      dropdown.style.display = 'none';
-      console.log('🔒 Closed');
-    } else {
-      dropdown.style.display = 'block';
-      console.log('🔓 Opened');
-    }
-  };
-  
-  // Close when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.language-selector')) {
-      document.querySelectorAll('.lang-dropdown').forEach(function(dropdown) {
-        dropdown.style.display = 'none';
-      });
-    }
-  });
-  
-  console.log('✅ Language selector ready');
-</script>
 
 <style>
   .language-selector {
-    position: relative;
-    display: inline-block;
-  }
-
-  .lang-toggle {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    cursor: pointer;
     font-size: 0.9rem;
-    color: #333;
-    min-width: 120px;
   }
 
-  .lang-toggle:hover {
-    background: #f5f5f5;
-    border-color: #007acc;
-  }
-
-  .lang-dropdown {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 120px;
-    z-index: 9999;
-    display: none;
-  }
-
-  .lang-option {
-    display: block;
-    padding: 0.75rem 1rem;
+  .lang-link {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
     color: #333;
     text-decoration: none;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
   }
 
-  .lang-option:last-child {
-    border-bottom: none;
+  .lang-link:hover {
+    color: #007acc;
+    background: rgba(0, 122, 204, 0.1);
   }
 
-  .lang-option:hover {
-    background: #f5f5f5;
-  }
-
-  .lang-option.active {
-    background: #007acc;
-    color: white;
+  .lang-link.active {
+    color: #007acc;
     font-weight: 600;
   }
 
+  .lang-link.active svg {
+    color: #007acc;
+  }
+
+  .separator {
+    color: #ccc;
+    font-size: 0.8rem;
+  }
+
   @media (max-width: 768px) {
-    .lang-toggle {
-      padding: 0.4rem 0.8rem;
+    .language-selector {
+      gap: 0.3rem;
       font-size: 0.8rem;
-      min-width: 100px;
     }
     
-    .lang-dropdown {
-      right: -1rem;
-      min-width: 100px;
+    .lang-link {
+      padding: 0.2rem 0.3rem;
     }
   }
 </style>
