@@ -62,9 +62,11 @@ function createFrontmatter(data) {
   
   for (const [key, value] of Object.entries(data)) {
     if (Array.isArray(value)) {
-      result += `${key}: [${value.map(v => `'${v}'`).join(', ')}]\n`;
+      result += `${key}: [${value.map(v => `"${v.replace(/"/g, '\\"')}"`).join(', ')}]\n`;
     } else {
-      result += `${key}: '${value}'\n`;
+      // Use double quotes and escape any existing double quotes
+      const escapedValue = value.toString().replace(/"/g, '\\"');
+      result += `${key}: "${escapedValue}"\n`;
     }
   }
   
