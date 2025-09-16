@@ -1,11 +1,11 @@
 ---
-title: 'O cachorro não quer comer'
-description: 'O cachorro está cansado e não quer comer'
-pubDate: '2025-09-16'
-author: 'Wallu Team'
-tags: ['tag1', 'tag2']
-heroImage: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=400&fit=crop'
-language: 'pt'
+title: "O cachorro não quer comer"
+description: "O cachorro está cansado e não quer comer"
+pubDate: "2025-09-16"
+author: "Wallu Team"
+tags: ["tag1", "tag2"]
+heroImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=400&fit=crop"
+language: "pt"
 ---
 
 # O cachorro não quer comer
