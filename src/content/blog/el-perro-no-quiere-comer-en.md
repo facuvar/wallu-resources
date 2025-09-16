@@ -1,5 +1,5 @@
 ---
-title: 'The dog doesn't want to eat'
+title: 'The dog does not want to eat'
 description: 'The dog is tired and doesn't want to eat'
 pubDate: '2025-09-16'
 author: 'Wallu Team'
