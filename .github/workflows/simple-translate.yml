@@ -1,0 +1,39 @@
+name: Simple Auto Translate
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  translate-and-commit:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '.md') || contains(github.event.head_commit.added, '.md')
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - run: npm ci
+    
+    - name: Run translations
+      run: npm run translate-posts
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      continue-on-error: true
+        
+    - name: Commit new translations
+      run: |
+        git config user.name "Translation Bot"
+        git config user.email "bot@wallu.app"
+        git add .
+        if ! git diff --staged --quiet; then
+          git commit -m "🌍 Auto-translate posts [skip ci]"
+          git push
+        fi
