@@ -1,5 +1,5 @@
 ---
-title: 'Los gatitos y sus travesuras diarias'
+title: 'Los gatitos y sus travesuras diarias son geniales'
 description: 'Una nota divertida sobre cómo los gatos llenan de alegría (y caos) el hogar.'
 pubDate: '2025-09-16'
 author: 'Wallu Team'
@@ -58,3 +58,4 @@ Los **gatitos** son pequeños maestros de la alegría y el desorden.
 Con sus travesuras y su ternura infinita, logran que cada día sea un poco más especial.  
 
 Adoptar un gatito no solo cambia tu rutina, también transforma tu hogar en un lugar lleno de vida.
+
