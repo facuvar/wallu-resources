@@ -13,6 +13,6 @@ language: 'en'
 The dog looks at me at the bowl as if I had served him boiled broccoli with a "what is this?" expression.
 I bring the food closer and he smells it with distrust, then turns around offended, as if instead of kibble I had given him taxes.
 I insist: "Come on, eat, you love this!".
-He responds with his look: "Let's see, human, would you eat the same thing every day? Kibble in the morning, kibble in the afternoon, kibble at night! Not even Netflix repeats series this much".
+
 
 And there he stays, lying down, waiting for me to bring him a juicy steak or at least a pizza with extra cheese.
