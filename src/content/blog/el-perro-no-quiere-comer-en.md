@@ -1,6 +1,6 @@
 ---
 title: 'The dog does not want to eat'
-description: 'The dog is tired and doesn't want to eat'
+description: 'The dog is tired and does not want to eat'
 pubDate: '2025-09-16'
 author: 'Wallu Team'
 tags: ['tag1', 'tag2']
