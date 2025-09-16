@@ -6,21 +6,25 @@ export interface Props {
 }
 
 const { currentLang } = Astro.props;
+
+// Generate unique ID for this instance
+const selectorId = `lang-selector-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class="language-selector">
-  <button class="lang-toggle" aria-label="Cambiar idioma">
+<div class="language-selector" id={selectorId}>
+  <button class="lang-toggle" type="button" aria-label="Cambiar idioma" aria-expanded="false">
     <span class="current-lang">{languages[currentLang]}</span>
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" class="dropdown-arrow">
       <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none"/>
     </svg>
   </button>
-  <div class="lang-dropdown">
+  <div class="lang-dropdown" role="menu">
     {Object.entries(languages).map(([code, name]) => (
       <a 
         href={code === 'es' ? '/' : `/${code}/`}
         class={`lang-option ${code === currentLang ? 'active' : ''}`}
         data-lang={code}
+        role="menuitem"
       >
         {name}
       </a>
@@ -46,36 +50,54 @@ const { currentLang } = Astro.props;
     font-size: 0.9rem;
     color: rgb(var(--black));
     transition: all 0.3s ease;
+    min-width: 120px;
+    justify-content: space-between;
   }
 
-  .lang-toggle:hover {
+  .lang-toggle:hover,
+  .lang-toggle:focus {
     background: rgba(var(--accent), 10%);
     border-color: rgba(var(--accent), 40%);
+    outline: none;
+  }
+
+  .dropdown-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .language-selector.show .dropdown-arrow {
+    transform: rotate(180deg);
   }
 
   .lang-dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.5rem);
     right: 0;
-    margin-top: 0.5rem;
     background: white;
     border: 1px solid rgba(var(--black), 20%);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1000;
     min-width: 120px;
+    z-index: 9999;
+    
+    /* Hidden by default */
+    display: none;
   }
 
-  .language-selector:hover .lang-dropdown,
-  .language-selector.open .lang-dropdown,
-  .language-selector.active .lang-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  .language-selector.show .lang-dropdown {
+    display: block;
+    animation: dropdownFadeIn 0.2s ease forwards;
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .lang-option {
@@ -103,88 +125,115 @@ const { currentLang } = Astro.props;
     .lang-toggle {
       padding: 0.4rem 0.8rem;
       font-size: 0.8rem;
+      min-width: 100px;
     }
     
     .lang-dropdown {
       right: -1rem;
+      min-width: 100px;
     }
   }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('🌍 Language selector script loaded');
+(() => {
+  'use strict';
+  
+  function initLanguageSelector() {
+    console.log('🌍 Initializing language selectors...');
     
-    // Handle language selector toggle
     const selectors = document.querySelectorAll('.language-selector');
-    console.log(`Found ${selectors.length} language selectors`);
+    console.log(`Found ${selectors.length} language selector(s)`);
     
     selectors.forEach((selector, index) => {
       const toggle = selector.querySelector('.lang-toggle');
       const dropdown = selector.querySelector('.lang-dropdown');
       
-      console.log(`Selector ${index}:`, { toggle: !!toggle, dropdown: !!dropdown });
-      
-      if (toggle && dropdown) {
-        // Toggle dropdown on click
-        toggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          console.log('🔄 Toggle clicked');
-          
-          // Close other dropdowns
-          selectors.forEach(otherSelector => {
-            if (otherSelector !== selector) {
-              otherSelector.classList.remove('open', 'active');
-            }
-          });
-          
-          // Toggle current dropdown
-          const isOpen = selector.classList.contains('open');
-          if (isOpen) {
-            selector.classList.remove('open', 'active');
-          } else {
-            selector.classList.add('open', 'active');
-          }
-          
-          console.log('✅ Dropdown state:', selector.classList.contains('open'));
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!selector.contains(e.target)) {
-            selector.classList.remove('open', 'active');
-          }
-        });
-        
-        console.log(`✅ Selector ${index} initialized successfully`);
-      } else {
-        console.error(`❌ Selector ${index} missing elements`);
+      if (!toggle || !dropdown) {
+        console.warn(`❌ Selector ${index}: Missing toggle or dropdown`);
+        return;
       }
+      
+      console.log(`✅ Initializing selector ${index}`);
+      
+      // Toggle dropdown on button click
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log(`🔄 Toggle ${index} clicked`);
+        
+        // Close all other dropdowns
+        selectors.forEach((otherSelector, otherIndex) => {
+          if (otherSelector !== selector) {
+            otherSelector.classList.remove('show');
+            const otherToggle = otherSelector.querySelector('.lang-toggle');
+            if (otherToggle) {
+              otherToggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+        
+        // Toggle current dropdown
+        const isOpen = selector.classList.contains('show');
+        
+        if (isOpen) {
+          selector.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          console.log(`🔒 Dropdown ${index} closed`);
+        } else {
+          selector.classList.add('show');
+          toggle.setAttribute('aria-expanded', 'true');
+          console.log(`🔓 Dropdown ${index} opened`);
+        }
+      });
+      
+      // Handle language option clicks
+      const options = selector.querySelectorAll('.lang-option');
+      options.forEach(option => {
+        option.addEventListener('click', (e) => {
+          const lang = option.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('preferred-language', lang);
+            console.log(`💾 Language preference saved: ${lang}`);
+          }
+        });
+      });
     });
     
-    // Store language preference when clicking language options
-    document.querySelectorAll('.lang-option').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const lang = e.target.getAttribute('data-lang');
-        if (lang) {
-          localStorage.setItem('preferred-language', lang);
-          console.log('🗣️ Language preference saved:', lang);
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      const clickedSelector = e.target.closest('.language-selector');
+      
+      selectors.forEach(selector => {
+        if (selector !== clickedSelector) {
+          selector.classList.remove('show');
+          const toggle = selector.querySelector('.lang-toggle');
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+          }
         }
       });
     });
     
-    // Browser language detection (simplified)
+    // Simple browser language detection
     const currentPath = window.location.pathname;
     if (currentPath === '/' && !localStorage.getItem('preferred-language')) {
       const browserLang = navigator.language.split('-')[0];
-      if (browserLang === 'en' || browserLang === 'pt') {
+      if (['en', 'pt'].includes(browserLang)) {
         localStorage.setItem('preferred-language', browserLang);
         window.location.href = `/${browserLang}/`;
       } else {
         localStorage.setItem('preferred-language', 'es');
       }
     }
-  });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageSelector);
+  } else {
+    initLanguageSelector();
+  }
+})();
 </script>
