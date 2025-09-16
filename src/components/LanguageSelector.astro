@@ -71,7 +71,8 @@ const { currentLang } = Astro.props;
   }
 
   .language-selector:hover .lang-dropdown,
-  .language-selector.open .lang-dropdown {
+  .language-selector.open .lang-dropdown,
+  .language-selector.active .lang-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -111,27 +112,18 @@ const { currentLang } = Astro.props;
 </style>
 
 <script>
-  // Client-side language detection and redirect
   document.addEventListener('DOMContentLoaded', () => {
-    const currentPath = window.location.pathname;
-    const hasLanguagePrefix = /^\/(en|pt)\//.test(currentPath);
-    
-    // Only redirect if we're on the root page and don't have a language preference stored
-    if (currentPath === '/' && !localStorage.getItem('preferred-language')) {
-      const browserLang = navigator.language.split('-')[0];
-      
-      if (browserLang === 'en' || browserLang === 'pt') {
-        localStorage.setItem('preferred-language', browserLang);
-        window.location.href = `/${browserLang}/`;
-      } else {
-        localStorage.setItem('preferred-language', 'es');
-      }
-    }
+    console.log('🌍 Language selector script loaded');
     
     // Handle language selector toggle
-    document.querySelectorAll('.language-selector').forEach(selector => {
+    const selectors = document.querySelectorAll('.language-selector');
+    console.log(`Found ${selectors.length} language selectors`);
+    
+    selectors.forEach((selector, index) => {
       const toggle = selector.querySelector('.lang-toggle');
       const dropdown = selector.querySelector('.lang-dropdown');
+      
+      console.log(`Selector ${index}:`, { toggle: !!toggle, dropdown: !!dropdown });
       
       if (toggle && dropdown) {
         // Toggle dropdown on click
@@ -139,34 +131,60 @@ const { currentLang } = Astro.props;
           e.preventDefault();
           e.stopPropagation();
           
-          // Close other open dropdowns
-          document.querySelectorAll('.language-selector').forEach(otherSelector => {
+          console.log('🔄 Toggle clicked');
+          
+          // Close other dropdowns
+          selectors.forEach(otherSelector => {
             if (otherSelector !== selector) {
-              otherSelector.classList.remove('open');
+              otherSelector.classList.remove('open', 'active');
             }
           });
           
           // Toggle current dropdown
-          selector.classList.toggle('open');
+          const isOpen = selector.classList.contains('open');
+          if (isOpen) {
+            selector.classList.remove('open', 'active');
+          } else {
+            selector.classList.add('open', 'active');
+          }
+          
+          console.log('✅ Dropdown state:', selector.classList.contains('open'));
         });
         
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-          if (!selector.contains(e.target as Node)) {
-            selector.classList.remove('open');
+          if (!selector.contains(e.target)) {
+            selector.classList.remove('open', 'active');
           }
         });
+        
+        console.log(`✅ Selector ${index} initialized successfully`);
+      } else {
+        console.error(`❌ Selector ${index} missing elements`);
       }
     });
     
     // Store language preference when clicking language options
     document.querySelectorAll('.lang-option').forEach(link => {
       link.addEventListener('click', (e) => {
-        const lang = (e.target as HTMLElement).getAttribute('data-lang');
+        const lang = e.target.getAttribute('data-lang');
         if (lang) {
           localStorage.setItem('preferred-language', lang);
+          console.log('🗣️ Language preference saved:', lang);
         }
       });
     });
+    
+    // Browser language detection (simplified)
+    const currentPath = window.location.pathname;
+    if (currentPath === '/' && !localStorage.getItem('preferred-language')) {
+      const browserLang = navigator.language.split('-')[0];
+      if (browserLang === 'en' || browserLang === 'pt') {
+        localStorage.setItem('preferred-language', browserLang);
+        window.location.href = `/${browserLang}/`;
+      } else {
+        localStorage.setItem('preferred-language', 'es');
+      }
+    }
   });
 </script>

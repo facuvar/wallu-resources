@@ -5,11 +5,12 @@ pubDate: '2025-09-15'
 author: 'Wallu Team'
 tags: ['ebooks', 'marketing digital', 'wallu']
 heroImage: 'https://images.unsplash.com/photo-1611328857214-a5aae689f21a?w=800&h=400&fit=crop'
+language: 'es'
 ---
 
 # Crear ebooks y venderlos con Wallu: la forma más simple de generar ingresos online
 
-En la era digital, los **ebooks** se convirtieron en una de las formas más accesibles y rentables de compartir conocimiento.  
+En la era digital actual, los **ebooks** se convirtieron en una de las formas más accesibles y rentables de compartir conocimiento.  
 Con *Wallu*, podés crear ebooks en minutos usando inteligencia artificial y ponerlos a la venta sin necesidad de conocimientos técnicos.  
 
 ---

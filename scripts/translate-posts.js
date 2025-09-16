@@ -12,9 +12,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai;
 
 const BLOG_DIR = path.join(__dirname, '../src/content/blog');
 
@@ -169,9 +167,16 @@ async function translatePosts() {
   console.log('🌍 Starting post translation process...');
   
   if (!process.env.OPENAI_API_KEY) {
-    console.error('❌ OPENAI_API_KEY not found in environment variables');
-    process.exit(1);
+    console.warn('⚠️  OPENAI_API_KEY not found in environment variables');
+    console.log('🚀 Continuing with build - translations will be skipped');
+    console.log('💡 Translations will work when deployed to Railway with API key');
+    return;
   }
+
+  // Initialize OpenAI client only if API key is available
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
   
   try {
     const files = fs.readdirSync(BLOG_DIR);
