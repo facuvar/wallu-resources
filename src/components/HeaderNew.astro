@@ -36,7 +36,6 @@ const t = getTranslations(currentLang);
 			<div class="internal-links">
 				<HeaderLink href={currentLang === 'es' ? '/' : `/${currentLang}/`}>{t.nav.home}</HeaderLink>
 				<HeaderLink href={currentLang === 'es' ? '/blog' : `/${currentLang}/blog`}>{t.nav.blog}</HeaderLink>
-				<HeaderLink href={currentLang === 'es' ? '/about' : `/${currentLang}/about`}>{t.nav.about}</HeaderLink>
 			</div>
 			<div class="social-links">
 				<LanguageSelector currentLang={currentLang} />
@@ -61,7 +60,6 @@ const t = getTranslations(currentLang);
 				<div class="mobile-internal-links">
 					<HeaderLink href={currentLang === 'es' ? '/' : `/${currentLang}/`}>{t.nav.home}</HeaderLink>
 					<HeaderLink href={currentLang === 'es' ? '/blog' : `/${currentLang}/blog`}>{t.nav.blog}</HeaderLink>
-					<HeaderLink href={currentLang === 'es' ? '/about' : `/${currentLang}/about`}>{t.nav.about}</HeaderLink>
 				</div>
 				<div class="mobile-social-links">
 					<LanguageSelector currentLang={currentLang} />
