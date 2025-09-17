@@ -6,6 +6,7 @@ import Footer from '../../../components/Footer.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/HeaderNew.astro';
 import { getTranslations } from '../../../i18n/translations';
+import { Calendar, BookOpen } from '@lucide/astro';
 
 const t = getTranslations('pt');
 
@@ -142,7 +143,7 @@ const posts = allPosts
 		<Header />
 		<main>
 			<div class="page-title">
-				<h1>📝 Blog</h1>
+				<h1><BookOpen size={32} style="display: inline; margin-right: 0.5rem; vertical-align: middle;" /> Blog</h1>
 				<p>Recursos, tutoriais e guias para criar ebooks com IA</p>
 			</div>
 			<section>
@@ -156,9 +157,10 @@ const posts = allPosts
 									)}
 									<div class="content">
 										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
+											<p class="date">
+												<Calendar size={14} style="display: inline; margin-right: 0.3rem; vertical-align: middle;" />
+												<FormattedDate date={post.data.pubDate} />
+											</p>
 									</div>
 								</a>
 							</li>
