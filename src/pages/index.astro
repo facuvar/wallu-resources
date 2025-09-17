@@ -60,41 +60,43 @@ const t = getTranslations('es');
 					'es-do': '/'
 				};
 				
-				// Buscar el primer idioma compatible
+				// Priorizar inglés y portugués sobre español
+				let foundEnglish = false;
+				let foundPortuguese = false;
+				let foundSpanish = false;
+				
+				// Primera pasada: buscar inglés y portugués
 				for (const lang of browserLangs) {
 					const normalizedLang = lang.toLowerCase();
-					console.log('🔍 Evaluando idioma:', normalizedLang);
+					const baseLang = normalizedLang.split('-')[0];
+					console.log('🔍 Evaluando idioma:', normalizedLang, 'base:', baseLang);
 					
-					// Buscar coincidencia exacta primero
-					if (langMap[normalizedLang]) {
-						console.log('✅ Coincidencia exacta encontrada:', normalizedLang, '→', langMap[normalizedLang]);
-						if (langMap[normalizedLang] !== '/') {
-							console.log('🚀 Redirigiendo a:', langMap[normalizedLang]);
-							window.location.replace(langMap[normalizedLang] + '?lang=detected');
-							return;
-						} else {
-							console.log('🏠 Quedándose en español (raíz)');
-							return;
-						}
+					// Prioridad 1: Inglés
+					if (baseLang === 'en') {
+						console.log('🇺🇸 ¡Inglés encontrado! Redirigiendo a /en/');
+						window.location.replace('/en/?lang=detected');
+						return;
 					}
 					
-					// Buscar por código de idioma base (ej: 'en' de 'en-CA')
-					const baseLang = normalizedLang.split('-')[0];
-					console.log('🔍 Evaluando idioma base:', baseLang);
-					if (langMap[baseLang]) {
-						console.log('✅ Coincidencia base encontrada:', baseLang, '→', langMap[baseLang]);
-						if (langMap[baseLang] !== '/') {
-							console.log('🚀 Redirigiendo a:', langMap[baseLang]);
-							window.location.replace(langMap[baseLang] + '?lang=detected');
-							return;
-						} else {
-							console.log('🏠 Quedándose en español (raíz)');
-							return;
-						}
+					// Prioridad 2: Portugués
+					if (baseLang === 'pt') {
+						console.log('🇧🇷 ¡Portugués encontrado! Redirigiendo a /pt/');
+						window.location.replace('/pt/?lang=detected');
+						return;
+					}
+					
+					// Marcar si encontramos español para el final
+					if (baseLang === 'es') {
+						foundSpanish = true;
 					}
 				}
 				
-				console.log('⚠️ No se encontró idioma compatible, quedándose en español por defecto');
+				// Si llegamos aquí y hay español, quedarse en español
+				if (foundSpanish) {
+					console.log('🇪🇸 Español encontrado, quedándose en la raíz');
+				} else {
+					console.log('⚠️ No se encontró idioma compatible, quedándose en español por defecto');
+				}
 			})();
 		</script>
 	</head>
