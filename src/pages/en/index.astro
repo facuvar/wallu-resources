@@ -3,6 +3,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/HeaderNew.astro';
 import { getTranslations } from '../../i18n/translations';
+import { BookOpen, Bot, Palette, DollarSign } from '@lucide/astro';
 
 const t = getTranslations('en');
 ---
@@ -16,7 +17,7 @@ const t = getTranslations('en');
 		<Header />
 		<main>
 			<section class="hero">
-				<h1>📚 {t.home.title}</h1>
+				<h1><BookOpen size={48} style="display: inline; margin-right: 1rem; vertical-align: middle;" /> {t.home.title}</h1>
 				<p class="hero-subtitle">
 					{t.home.subtitle}
 				</p>
@@ -30,15 +31,18 @@ const t = getTranslations('en');
 				<h2>{t.home.whyChoose}</h2>
 				<div class="features-grid">
 					<div class="feature">
-						<h3>{t.home.features.ai.title}</h3>
+						<Bot size={32} class="feature-icon" />
+						<h3>{t.home.features.ai.title.replace('🤖 ', '')}</h3>
 						<p>{t.home.features.ai.description}</p>
 					</div>
 					<div class="feature">
-						<h3>{t.home.features.design.title}</h3>
+						<Palette size={32} class="feature-icon" />
+						<h3>{t.home.features.design.title.replace('🎨 ', '')}</h3>
 						<p>{t.home.features.design.description}</p>
 					</div>
 					<div class="feature">
-						<h3>{t.home.features.monetization.title}</h3>
+						<DollarSign size={32} class="feature-icon" />
+						<h3>{t.home.features.monetization.title.replace('💰 ', '')}</h3>
 						<p>{t.home.features.monetization.description}</p>
 					</div>
 				</div>
@@ -157,6 +161,11 @@ const t = getTranslations('en');
 				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 				border: 1px solid #f0f0f0;
 				text-align: center;
+			}
+
+			.feature-icon {
+				color: #667eea;
+				margin-bottom: 1rem;
 			}
 
 			.feature h3 {
