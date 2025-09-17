@@ -15,66 +15,86 @@ const t = getTranslations('es');
 		<script is:inline>
 			// Detección automática del idioma del navegador
 			(function() {
+				console.log('🌍 Iniciando detección de idioma...');
+				console.log('📍 Pathname actual:', window.location.pathname);
+				console.log('🔍 Search params:', window.location.search);
+				
 				// Solo ejecutar en la página raíz y si no hay un parámetro que indique que ya se procesó
 				if (window.location.pathname !== '/' || window.location.search.includes('lang=detected')) {
+					console.log('⚠️ Saltando detección - ya procesado o no es página raíz');
 					return;
 				}
 				
 				// Obtener idiomas preferidos del navegador
 				const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage];
+				console.log('🗣️ Idiomas del navegador:', browserLangs);
 				
 				// Mapear códigos de idioma del navegador a nuestras rutas
 				const langMap = {
 					'en': '/en/',
-					'en-US': '/en/',
-					'en-GB': '/en/',
+					'en-us': '/en/',
+					'en-gb': '/en/',
+					'en-ca': '/en/',
+					'en-au': '/en/',
 					'pt': '/pt/',
-					'pt-BR': '/pt/',
-					'pt-PT': '/pt/',
+					'pt-br': '/pt/',
+					'pt-pt': '/pt/',
 					'es': '/',
-					'es-ES': '/',
-					'es-AR': '/',
-					'es-MX': '/',
-					'es-CO': '/',
-					'es-CL': '/',
-					'es-PE': '/',
-					'es-VE': '/',
-					'es-EC': '/',
-					'es-GT': '/',
-					'es-UY': '/',
-					'es-BO': '/',
-					'es-PY': '/',
-					'es-SV': '/',
-					'es-HN': '/',
-					'es-NI': '/',
-					'es-CR': '/',
-					'es-PA': '/',
-					'es-DO': '/'
+					'es-es': '/',
+					'es-ar': '/',
+					'es-mx': '/',
+					'es-co': '/',
+					'es-cl': '/',
+					'es-pe': '/',
+					'es-ve': '/',
+					'es-ec': '/',
+					'es-gt': '/',
+					'es-uy': '/',
+					'es-bo': '/',
+					'es-py': '/',
+					'es-sv': '/',
+					'es-hn': '/',
+					'es-ni': '/',
+					'es-cr': '/',
+					'es-pa': '/',
+					'es-do': '/'
 				};
 				
 				// Buscar el primer idioma compatible
 				for (const lang of browserLangs) {
 					const normalizedLang = lang.toLowerCase();
+					console.log('🔍 Evaluando idioma:', normalizedLang);
 					
 					// Buscar coincidencia exacta primero
 					if (langMap[normalizedLang]) {
+						console.log('✅ Coincidencia exacta encontrada:', normalizedLang, '→', langMap[normalizedLang]);
 						if (langMap[normalizedLang] !== '/') {
+							console.log('🚀 Redirigiendo a:', langMap[normalizedLang]);
 							window.location.replace(langMap[normalizedLang] + '?lang=detected');
+							return;
+						} else {
+							console.log('🏠 Quedándose en español (raíz)');
+							return;
 						}
-						return;
 					}
 					
 					// Buscar por código de idioma base (ej: 'en' de 'en-CA')
 					const baseLang = normalizedLang.split('-')[0];
+					console.log('🔍 Evaluando idioma base:', baseLang);
 					if (langMap[baseLang]) {
+						console.log('✅ Coincidencia base encontrada:', baseLang, '→', langMap[baseLang]);
 						if (langMap[baseLang] !== '/') {
+							console.log('🚀 Redirigiendo a:', langMap[baseLang]);
 							window.location.replace(langMap[baseLang] + '?lang=detected');
+							return;
+						} else {
+							console.log('🏠 Quedándose en español (raíz)');
+							return;
 						}
-						return;
 					}
 				}
 				
-				// Si no se encuentra ningún idioma compatible, quedarse en español (default)
+				console.log('⚠️ No se encontró idioma compatible, quedándose en español por defecto');
 			})();
 		</script>
 	</head>
