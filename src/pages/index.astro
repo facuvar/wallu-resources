@@ -60,43 +60,27 @@ const t = getTranslations('es');
 					'es-do': '/'
 				};
 				
-				// Priorizar inglés y portugués sobre español
-				let foundEnglish = false;
-				let foundPortuguese = false;
-				let foundSpanish = false;
+				// Solo redirigir si el PRIMER idioma es inglés o portugués
+				const primaryLang = browserLangs[0]?.toLowerCase() || '';
+				const primaryBaseLang = primaryLang.split('-')[0];
 				
-				// Primera pasada: buscar inglés y portugués
-				for (const lang of browserLangs) {
-					const normalizedLang = lang.toLowerCase();
-					const baseLang = normalizedLang.split('-')[0];
-					console.log('🔍 Evaluando idioma:', normalizedLang, 'base:', baseLang);
-					
-					// Prioridad 1: Inglés
-					if (baseLang === 'en') {
-						console.log('🇺🇸 ¡Inglés encontrado! Redirigiendo a /en/');
-						window.location.replace('/en/?lang=detected');
-						return;
-					}
-					
-					// Prioridad 2: Portugués
-					if (baseLang === 'pt') {
-						console.log('🇧🇷 ¡Portugués encontrado! Redirigiendo a /pt/');
-						window.location.replace('/pt/?lang=detected');
-						return;
-					}
-					
-					// Marcar si encontramos español para el final
-					if (baseLang === 'es') {
-						foundSpanish = true;
-					}
+				console.log('🔍 Idioma principal del navegador:', primaryLang, 'base:', primaryBaseLang);
+				
+				// Solo redirigir si el idioma PRINCIPAL es inglés o portugués
+				if (primaryBaseLang === 'en') {
+					console.log('🇺🇸 ¡Idioma principal es inglés! Redirigiendo a /en/');
+					window.location.replace('/en/?lang=detected');
+					return;
 				}
 				
-				// Si llegamos aquí y hay español, quedarse en español
-				if (foundSpanish) {
-					console.log('🇪🇸 Español encontrado, quedándose en la raíz');
-				} else {
-					console.log('⚠️ No se encontró idioma compatible, quedándose en español por defecto');
+				if (primaryBaseLang === 'pt') {
+					console.log('🇧🇷 ¡Idioma principal es portugués! Redirigiendo a /pt/');
+					window.location.replace('/pt/?lang=detected');
+					return;
 				}
+				
+				// Si el idioma principal es español o cualquier otro, quedarse en español
+				console.log('🇪🇸 Idioma principal es español o no compatible, quedándose en la raíz');
 			})();
 		</script>
 	</head>
