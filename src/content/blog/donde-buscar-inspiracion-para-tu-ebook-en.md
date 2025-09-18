@@ -61,4 +61,4 @@ Publishing is not enough: share it on your **social media**, blog, or website. T
 With **Wallu** you don’t need previous experience: AI helps you every step of the way.  
 Follow these tips and turn your ideas into a professional ebook that you can publish and sell quickly and easily.  
 
-Start today at [Wallu.app](https://wallu.app) and become a digital author.
+Start today at [Wallu.app](https://wallu.app) and become a digital author!
