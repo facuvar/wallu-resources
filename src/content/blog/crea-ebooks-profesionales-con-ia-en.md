@@ -4,7 +4,7 @@ description: 'How to turn your ideas into high-quality ebooks using artificial i
 pubDate: '2025-09-19'
 author: 'Wallu Team'
 tags: ['ebooks', 'artificial intelligence', 'wallu']
-heroImage: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&h=400&fit=crop'  # Imagen de persona escribiendo en laptop
+heroImage: 'https://images.unsplash.com/photo-1623414686230-2d74a4d73cd5?w=800&h=400&fit=crop'  # Imagen de persona escribiendo en laptop
 language: 'en'
 ---
 

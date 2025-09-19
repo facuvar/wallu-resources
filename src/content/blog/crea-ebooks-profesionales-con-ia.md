@@ -4,7 +4,7 @@ description: 'Cómo transformar tus ideas en ebooks de calidad utilizando inteli
 pubDate: '2025-09-19'
 author: 'Wallu Team'
 tags: ['ebooks', 'inteligencia artificial', 'wallu']
-heroImage: 'https://images.unsplash.com/photo-1581091215367-59ab6a6cfe4d?w=800&h=400&fit=crop'
+heroImage: 'https://images.unsplash.com/photo-1623414686230-2d74a4d73cd5?w=800&h=400&fit=crop'
 language: 'es'
 ---
 
