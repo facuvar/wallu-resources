@@ -6,7 +6,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: process.env.ASTRO_SITE_URL || 'https://resources.wallu.app',
+	site: 'https://resources.wallu.app',
 	integrations: [mdx(), sitemap()],
 	i18n: {
 		defaultLocale: 'es',
