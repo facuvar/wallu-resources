@@ -22,7 +22,7 @@ export default defineConfig({
 	},
 	compressHTML: true,
 	// Forzar rebuild limpio
-	cacheDir: './.astro-cache-' + (process.env.CACHE_BUST || 'default'),
+	cacheDir: './.astro-cache-' + (process.env.CACHE_BUST || 'sitemap-fix'),
 	// Configuración para desarrollo local con Decap CMS
 	vite: {
 		server: {
